@@ -1,0 +1,288 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+\sloppy
+
+\title{Estudo Experimental de Algoritmos de Ordenacao em C: analise de comparacoes, trocas e tempo de execucao}
+
+\author{Fabricio Rocha\inst{1}}
+
+\address{Trabalho Pratico -- Estruturas de Dados II\\
+  \email{fabricio@example.com}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents an empirical evaluation of 13 sorting algorithms implemented in C.
+The algorithms were executed over instances with 10,000 and 1,000,000 elements under
+three input patterns: random, ascending and descending. For each run, we collected the
+number of comparisons, number of swaps and execution time. The study highlights the
+practical behavior of quadratic and $O(n \log n)$ methods, including the two required
+Quicksort variants (center pivot and median-of-three pivot), and discusses the impact
+of timeouts in large instances.
+\end{abstract}
+
+\begin{resumo}
+Este artigo apresenta uma avaliacao experimental de 13 algoritmos de ordenacao
+implementados em C. Os algoritmos foram executados sobre instancias com 10.000 e
+1.000.000 de elementos em tres padroes de entrada: aleatoria, ordenada crescente e
+ordenada decrescente. Em cada execucao foram coletados numero de comparacoes,
+numero de trocas e tempo de execucao. A analise evidencia o comportamento pratico de
+metodos quadraticos e de ordem $O(n \log n)$, incluindo as duas variantes exigidas de
+Quicksort (pivo central e mediana de tres), alem de discutir o efeito de timeouts em
+instancias grandes.
+\end{resumo}
+
+\section{Introducao}
+O objetivo deste trabalho foi comparar, de forma controlada, diferentes estrategias de
+ordenacao estudadas na disciplina. Foram analisados os algoritmos: bolha,
+bolha com parada, insercao, insercao binaria, insercao ternaria, shell,
+selecao, heap, quicksort com pivo central, quicksort com mediana de tres,
+merge, radix e bucket.
+
+O foco da avaliacao foi observar, para diferentes perfis de entrada, como os custos
+teoricos se refletem na pratica em termos de comparacoes, trocas e tempo.
+
+\section{Metodologia Experimental}
+\subsection{Ambiente e Instrumentacao}
+Os experimentos foram executados em ambiente Windows com compilacao C11.
+O programa \texttt{experimentos.c} foi utilizado para: (i) carregar as instancias,
+(ii) executar o algoritmo selecionado, (iii) contabilizar comparacoes e trocas,
+e (iv) medir tempo em segundos com \texttt{timespec\_get(TIME\_UTC)}.
+
+Para evitar execucoes inviaveis no caso de entradas com 1.000.000 de elementos,
+foi aplicado timeout de 8 segundos por experimento.
+Execucoes encerradas por esse limite foram marcadas como \texttt{timeout}.
+
+\subsection{Instancias e Cenarios}
+Foram utilizadas seis instancias:
+\begin{itemize}
+\item 10.000 elementos aleatorios
+\item 10.000 elementos ordenados crescentemente
+\item 10.000 elementos ordenados decrescentemente
+\item 1.000.000 elementos aleatorios
+\item 1.000.000 elementos ordenados crescentemente
+\item 1.000.000 elementos ordenados decrescentemente
+\end{itemize}
+
+Total de cenarios executados: $13 \times 6 = 78$.
+
+\section{Resultados}
+\subsection{Graficos de Tempo}
+A Figura~\ref{fig:tempo10k} apresenta os tempos para $n=10.000$.
+A Figura~\ref{fig:tempo1m} apresenta os tempos para $n=1.000.000$.
+Valores \texttt{timeout} nao sao plotados.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\textwidth,
+height=6.5cm,
+ybar,
+bar width=3pt,
+ymajorgrids=true,
+grid style=dashed,
+unbounded coords=jump,
+legend style={at={(0.5,1.15)},anchor=south,legend columns=3},
+symbolic x coords={bolha,bolha-parada,insercao,insercao-bin,insercao-ter,shell,selecao,heap,quick-centro,quick-mediana,merge,radix,bucket},
+xtick=data,
+xticklabel style={rotate=45,anchor=east,font=\scriptsize},
+ylabel={Tempo (s)},
+xlabel={Algoritmo}
+]
+\addplot table [x=algoritmo,y=aleatoria,col sep=comma] {graficos/tempo_10000.csv};
+\addplot table [x=algoritmo,y=crescente,col sep=comma] {graficos/tempo_10000.csv};
+\addplot table [x=algoritmo,y=decrescente,col sep=comma] {graficos/tempo_10000.csv};
+\legend{Aleatoria,Crescente,Decrescente}
+\end{axis}
+\end{tikzpicture}
+\caption{Tempo de execucao para $n=10.000$.}
+\label{fig:tempo10k}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\textwidth,
+height=6.8cm,
+ybar,
+bar width=3pt,
+ymode=log,
+log basis y={10},
+ymajorgrids=true,
+grid style=dashed,
+unbounded coords=jump,
+legend style={at={(0.5,1.15)},anchor=south,legend columns=3},
+symbolic x coords={bolha,bolha-parada,insercao,insercao-bin,insercao-ter,shell,selecao,heap,quick-centro,quick-mediana,merge,radix,bucket},
+xtick=data,
+xticklabel style={rotate=45,anchor=east,font=\scriptsize},
+ylabel={Tempo (s) em escala log},
+xlabel={Algoritmo}
+]
+\addplot table [x=algoritmo,y=aleatoria,col sep=comma] {graficos/tempo_1000000.csv};
+\addplot table [x=algoritmo,y=crescente,col sep=comma] {graficos/tempo_1000000.csv};
+\addplot table [x=algoritmo,y=decrescente,col sep=comma] {graficos/tempo_1000000.csv};
+\legend{Aleatoria,Crescente,Decrescente}
+\end{axis}
+\end{tikzpicture}
+\caption{Tempo de execucao para $n=1.000.000$ (escala logaritmica).}
+\label{fig:tempo1m}
+\end{figure}
+
+\subsection{Graficos de Comparacoes e Trocas ($n=10.000$)}
+As Figuras~\ref{fig:comp10k} e \ref{fig:trocas10k} destacam os custos internos
+de comparacoes e trocas para $n=10.000$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\textwidth,
+height=6.5cm,
+ybar,
+bar width=3pt,
+ymode=log,
+log basis y={10},
+ymajorgrids=true,
+grid style=dashed,
+unbounded coords=jump,
+legend style={at={(0.5,1.15)},anchor=south,legend columns=3},
+symbolic x coords={bolha,bolha-parada,insercao,insercao-bin,insercao-ter,shell,selecao,heap,quick-centro,quick-mediana,merge,radix,bucket},
+xtick=data,
+xticklabel style={rotate=45,anchor=east,font=\scriptsize},
+ylabel={Comparacoes (escala log)},
+xlabel={Algoritmo}
+]
+\addplot table [x=algoritmo,y=aleatoria,col sep=comma] {graficos/comparacoes_10000.csv};
+\addplot table [x=algoritmo,y=crescente,col sep=comma] {graficos/comparacoes_10000.csv};
+\addplot table [x=algoritmo,y=decrescente,col sep=comma] {graficos/comparacoes_10000.csv};
+\legend{Aleatoria,Crescente,Decrescente}
+\end{axis}
+\end{tikzpicture}
+\caption{Numero de comparacoes para $n=10.000$.}
+\label{fig:comp10k}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\textwidth,
+height=6.5cm,
+ybar,
+bar width=3pt,
+ymode=log,
+log basis y={10},
+ymajorgrids=true,
+grid style=dashed,
+unbounded coords=jump,
+legend style={at={(0.5,1.15)},anchor=south,legend columns=3},
+symbolic x coords={bolha,bolha-parada,insercao,insercao-bin,insercao-ter,shell,selecao,heap,quick-centro,quick-mediana,merge,radix,bucket},
+xtick=data,
+xticklabel style={rotate=45,anchor=east,font=\scriptsize},
+ylabel={Trocas (escala log)},
+xlabel={Algoritmo}
+]
+\addplot table [x=algoritmo,y=aleatoria,col sep=comma] {graficos/trocas_10000.csv};
+\addplot table [x=algoritmo,y=crescente,col sep=comma] {graficos/trocas_10000.csv};
+\addplot table [x=algoritmo,y=decrescente,col sep=comma] {graficos/trocas_10000.csv};
+\legend{Aleatoria,Crescente,Decrescente}
+\end{axis}
+\end{tikzpicture}
+\caption{Numero de trocas para $n=10.000$.}
+\label{fig:trocas10k}
+\end{figure}
+
+\subsection{Tabelas Completas por Cenario}
+As tabelas a seguir apresentam os resultados completos (comparacoes, trocas e tempo)
+para cada tamanho e tipo de entrada.
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=10.000$ com entrada aleatoria.}
+\label{tab:10000a}
+\input{tabelas/tab_10000_aleatoria.tex}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=10.000$ com entrada crescente.}
+\label{tab:10000c}
+\input{tabelas/tab_10000_crescente.tex}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=10.000$ com entrada decrescente.}
+\label{tab:10000d}
+\input{tabelas/tab_10000_decrescente.tex}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=1.000.000$ com entrada aleatoria.}
+\label{tab:1000000a}
+\input{tabelas/tab_1000000_aleatoria.tex}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=1.000.000$ com entrada crescente.}
+\label{tab:1000000c}
+\input{tabelas/tab_1000000_crescente.tex}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Resultados para $n=1.000.000$ com entrada decrescente.}
+\label{tab:1000000d}
+\input{tabelas/tab_1000000_decrescente.tex}
+\end{table}
+
+\section{Discussao}
+Os resultados confirmam o comportamento esperado dos algoritmos quadraticos.
+Em $n=1.000.000$, bolha, selecao e insercoes gerais tornam-se inviaveis em
+entrada aleatoria ou decrescente, atingindo timeout.
+
+Nos casos onde a entrada ja esta ordenada, algoritmos adaptativos se beneficiam:
+bolha com parada e insercao exibem tempos muito baixos em crescente.
+Por outro lado, essa vantagem nao se sustenta em perfis desfavoraveis.
+
+Entre os algoritmos de melhor escalabilidade, radix apresentou o menor tempo
+na instancia aleatoria de 1.000.000 elementos (aproximadamente 0,036 s),
+seguido de quicksort (centro e mediana) e heap/merge.
+
+As duas variantes de quicksort tiveram desempenho semelhante nas instancias grandes.
+Em entrada aleatoria, o pivo central foi ligeiramente mais rapido; em entrada
+decrescente, a mediana de tres foi levemente melhor em tempo.
+Esses dados indicam que ambas as abordagens sao competitivas, com pequenas variacoes
+dependentes da distribuicao.
+
+Bucket sort mostrou forte dependencia da distribuicao dos dados:
+obteve bom resultado em crescente para 1.000.000, mas estourou timeout em cenarios
+aleatorio e decrescente nessa mesma escala.
+
+\section{Conclusao}
+O estudo mostrou, de forma quantitativa, como os custos assintoticos se refletem
+na pratica sob diferentes entradas. Para volumes grandes, os metodos quadraticos
+ficam restritos a casos muito favoraveis, enquanto quicksort, heap, merge e radix
+mantem desempenho robusto.
+
+Como trabalho futuro, recomenda-se executar multiplas repeticoes por cenario,
+reportar media e desvio-padrao e incluir analise estatistica para fortalecer
+a comparabilidade entre implementacoes.
+
+\end{document}
+
