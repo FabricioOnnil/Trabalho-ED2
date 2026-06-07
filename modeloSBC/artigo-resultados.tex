@@ -1,12 +1,31 @@
 \documentclass[12pt]{article}
 
-\usepackage{sbc-template}
+\IfFileExists{sbc-template.sty}{
+  \usepackage{sbc-template}
+}{
+  \usepackage[a4paper,top=3.5cm,left=3cm,right=3cm,bottom=2.5cm]{geometry}
+}
 \usepackage{graphicx,url}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 \pgfplotsset{compat=1.18}
+
+\makeatletter
+\@ifundefined{inst}{\newcommand{\inst}[1]{}}{}
+\@ifundefined{email}{\newcommand{\email}[1]{\\\texttt{#1}}}{}
+\@ifundefined{address}{
+  \newcommand{\@address}{}
+  \newcommand{\address}[1]{\gdef\@address{#1}}
+  \newcommand{\printaddress}{\begin{center}\@address\end{center}}
+}{
+  \newcommand{\printaddress}{}
+}
+\@ifundefined{resumo}{
+  \newenvironment{resumo}{\begin{abstract}\textbf{Resumo.} }{\end{abstract}}
+}{}
+\makeatother
 
 \sloppy
 
@@ -21,6 +40,7 @@
 \begin{document}
 
 \maketitle
+\printaddress
 
 \begin{abstract}
 This paper presents an empirical evaluation of 13 sorting algorithms implemented in C.
