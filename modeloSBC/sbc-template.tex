@@ -23,24 +23,24 @@
 \maketitle
 
 \begin{abstract}
-This paper presents an empirical evaluation of 13 sorting algorithms implemented in C.
-The algorithms were executed over instances with 10,000 and 1,000,000 elements under
-three input patterns: random, ascending and descending. For each run, we collected the
-number of comparisons, number of swaps and execution time. The study highlights the
-practical behavior of quadratic and $O(n \log n)$ methods, including the two required
-Quicksort variants (center pivot and median-of-three pivot), and discusses the impact
-of timeouts in large instances.
+This paper presents a revised empirical evaluation of 13 sorting algorithms implemented
+in C, following the updated assignment requirements. Experiments were performed for
+instances with 10,000 and 1,000,000 elements under three input patterns: random,
+ascending and descending. For each execution, we report comparisons, swaps and runtime.
+The study includes the two required Quicksort variants (center pivot and median-of-three
+pivot), and adopts a maximum execution time of 24 hours per algorithm-instance pair,
+marking non-finished runs as timeout.
 \end{abstract}
 
 \begin{resumo}
-Este artigo apresenta uma avaliacao experimental de 13 algoritmos de ordenacao
-implementados em C. Os algoritmos foram executados sobre instancias com 10.000 e
-1.000.000 de elementos em tres padroes de entrada: aleatoria, ordenada crescente e
-ordenada decrescente. Em cada execucao foram coletados numero de comparacoes,
-numero de trocas e tempo de execucao. A analise evidencia o comportamento pratico de
-metodos quadraticos e de ordem $O(n \log n)$, incluindo as duas variantes exigidas de
-Quicksort (pivo central e mediana de tres), alem de discutir o efeito de timeouts em
-instancias grandes.
+Este artigo apresenta uma versao revisada da avaliacao experimental de 13 algoritmos de
+ordenacao implementados em C, em conformidade com o enunciado atualizado. Os
+algoritmos foram executados sobre instancias com 10.000 e 1.000.000 de elementos em
+tres padroes de entrada: aleatoria, ordenada crescente e ordenada decrescente. Em cada
+execucao foram coletados numero de comparacoes, numero de trocas e tempo de execucao.
+O estudo contempla as duas variantes exigidas de Quicksort (pivo central e mediana de
+tres) e adota tempo maximo de 24 horas por par algoritmo-instancia, registrando como
+timeout as execucoes nao finalizadas nesse limite.
 \end{resumo}
 
 \section{Introducao}
@@ -53,6 +53,20 @@ merge, radix e bucket.
 O foco da avaliacao foi observar, para diferentes perfis de entrada, como os custos
 teoricos se refletem na pratica em termos de comparacoes, trocas e tempo.
 
+Este documento foi revisado para atender as alteracoes das instrucoes de confeccao do
+artigo, mantendo rastreabilidade entre texto, tabelas e arquivos de resultados.
+
+\section{Aderencia ao Enunciado Atualizado}
+O artigo atende aos pontos centrais definidos no enunciado:
+\begin{itemize}
+\item implementacao e avaliacao de 13 algoritmos de ordenacao;
+\item comparacao em entradas de tamanho 10.000 e 1.000.000;
+\item uso dos tres perfis de entrada (aleatoria, crescente e decrescente);
+\item apresentacao das tres metricas exigidas: comparacoes, trocas e tempo;
+\item inclusao das duas variantes de Quicksort exigidas (quicksortcentro e quicksortmediana);
+\item uso de limite de 24 horas por algoritmo/instancia para classificar timeout.
+\end{itemize}
+
 \section{Metodologia Experimental}
 \subsection{Ambiente e Instrumentacao}
 Os experimentos foram executados em ambiente Windows com compilacao C11.
@@ -60,9 +74,9 @@ O programa \texttt{experimentos.c} foi utilizado para: (i) carregar as instancia
 (ii) executar o algoritmo selecionado, (iii) contabilizar comparacoes e trocas,
 e (iv) medir tempo em segundos com \texttt{timespec\_get(TIME\_UTC)}.
 
-Para evitar execucoes inviaveis no caso de entradas com 1.000.000 de elementos,
-foi aplicado timeout de 8 segundos por experimento.
-Execucoes encerradas por esse limite foram marcadas como \texttt{timeout}.
+Conforme o enunciado atualizado, foi adotado tempo maximo de 24 horas para cada
+par algoritmo/instancia. Execucoes nao finalizadas nesse intervalo foram registradas
+como \texttt{timeout} nos arquivos de resultados e nas tabelas deste artigo.
 
 \subsection{Instancias e Cenarios}
 Foram utilizadas seis instancias:
@@ -81,7 +95,8 @@ Total de cenarios executados: $13 \times 6 = 78$.
 \subsection{Graficos de Tempo}
 A Figura~\ref{fig:tempo10k} apresenta os tempos para $n=10.000$.
 A Figura~\ref{fig:tempo1m} apresenta os tempos para $n=1.000.000$.
-Valores \texttt{timeout} nao sao plotados.
+Valores \texttt{timeout} nao sao plotados (representados como \texttt{nan} nos CSVs
+de graficos).
 
 \begin{figure}[ht]
 \centering
@@ -254,7 +269,7 @@ para cada tamanho e tipo de entrada.
 \section{Discussao}
 Os resultados confirmam o comportamento esperado dos algoritmos quadraticos.
 Em $n=1.000.000$, bolha, selecao e insercoes gerais tornam-se inviaveis em
-entrada aleatoria ou decrescente, atingindo timeout.
+cenarios mais custosos, com ocorrencias de timeout registradas.
 
 Nos casos onde a entrada ja esta ordenada, algoritmos adaptativos se beneficiam:
 bolha com parada e insercao exibem tempos muito baixos em crescente.
@@ -271,7 +286,7 @@ Esses dados indicam que ambas as abordagens sao competitivas, com pequenas varia
 dependentes da distribuicao.
 
 Bucket sort mostrou forte dependencia da distribuicao dos dados:
-obteve bom resultado em crescente para 1.000.000, mas estourou timeout em cenarios
+obteve bom resultado em crescente para 1.000.000, mas apresentou timeout em cenarios
 aleatorio e decrescente nessa mesma escala.
 
 \section{Conclusao}
@@ -280,9 +295,9 @@ na pratica sob diferentes entradas. Para volumes grandes, os metodos quadraticos
 ficam restritos a casos muito favoraveis, enquanto quicksort, heap, merge e radix
 mantem desempenho robusto.
 
-Como trabalho futuro, recomenda-se executar multiplas repeticoes por cenario,
+Como continuidade, recomenda-se executar multiplas repeticoes por cenario,
 reportar media e desvio-padrao e incluir analise estatistica para fortalecer
-a comparabilidade entre implementacoes.
+a comparabilidade entre implementacoes e a reproducibilidade experimental.
 
 \end{document}
 

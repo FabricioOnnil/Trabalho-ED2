@@ -1,5 +1,5 @@
 **
-(artigo-resultados.tex
+(sbc-template.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -414,13 +414,13 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \backup@length=\skip52
 \ar@cellbox=\box64
 ))
-LaTeX Font Info:    Trying to load font information for TU+ptm on input line 40
+LaTeX Font Info:    Trying to load font information for TU+ptm on input line 21
 .
-LaTeX Font Info:    No file TUptm.fd. on input line 40.
+LaTeX Font Info:    No file TUptm.fd. on input line 21.
 
 
 LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 40.
+(Font)              using `TU/lmr/m/n' instead on input line 21.
 
 (l3backend-xetex.def
 File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
@@ -432,30 +432,30 @@ File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
 \g__pdf_backend_object_int=\count298
 \g__pdf_backend_annotation_int=\count299
 \g__pdf_backend_link_int=\count300
-) (artigo-resultados.aux)
-\openout1 = `artigo-resultados.aux'.
+) (sbc-template.aux)
+\openout1 = `sbc-template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 4
-0.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
+1.
  (ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -498,75 +498,75 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 
 LaTeX Font Warning: Font shape `TU/ptm/b/n' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 42.
+(Font)              using `TU/ptm/m/n' instead on input line 23.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 42.
+(Font)              <12> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 42.
+(Font)              <8> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 42.
-LaTeX Font Info:    Trying to load font information for TU+pcr on input line 42
+(Font)              <6> on input line 23.
+LaTeX Font Info:    Trying to load font information for TU+pcr on input line 23
 .
-LaTeX Font Info:    No file TUpcr.fd. on input line 42.
+LaTeX Font Info:    No file TUpcr.fd. on input line 23.
 
 LaTeX Font Warning: Font shape `TU/pcr/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 42.
+(Font)              using `TU/lmr/m/n' instead on input line 23.
 
 
 LaTeX Font Warning: Font shape `TU/ptm/b/it' undefined
-(Font)              using `TU/ptm/b/n' instead on input line 45.
+(Font)              using `TU/ptm/b/n' instead on input line 25.
 
 
 LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 45.
+(Font)              using `TU/ptm/m/n' instead on input line 25.
 
 [1
 
 ]
-Package pgfplots info on input line 138: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 118: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
 PGFPlots: reading {graficos/tempo_10000.csv}
 PGFPlots: reading {graficos/tempo_10000.csv}
 PGFPlots: reading {graficos/tempo_10000.csv}
-LaTeX Font Info:    Trying to load font information for TU+phv on input line 14
+LaTeX Font Info:    Trying to load font information for TU+phv on input line 12
 5.
-LaTeX Font Info:    No file TUphv.fd. on input line 145.
+LaTeX Font Info:    No file TUphv.fd. on input line 125.
 
 
 LaTeX Font Warning: Font shape `TU/phv/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 145.
+(Font)              using `TU/lmr/m/n' instead on input line 125.
 
 
 LaTeX Font Warning: Font shape `TU/phv/b/n' undefined
-(Font)              using `TU/phv/m/n' instead on input line 145.
+(Font)              using `TU/phv/m/n' instead on input line 125.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 145.
+(Font)              <7> on input line 125.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 145.
-Package pgfplots info on input line 168: Using 'lua backend=false' for axis: ym
+(Font)              <5> on input line 125.
+Package pgfplots info on input line 148: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
-Package pgfplots info on input line 168: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 148: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
 PGFPlots: reading {graficos/tempo_1000000.csv}
 PGFPlots: reading {graficos/tempo_1000000.csv}
 PGFPlots: reading {graficos/tempo_1000000.csv}
 
-Overfull \hbox (6.71999pt too wide) in paragraph at lines 174--175
+Overfull \hbox (6.71999pt too wide) in paragraph at lines 154--155
  [][] 
  []
 
-Package pgfplots info on input line 202: Using 'lua backend=false' for axis: ym
+Package pgfplots info on input line 182: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
-Package pgfplots info on input line 202: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 182: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
 PGFPlots: reading {graficos/comparacoes_10000.csv}
 PGFPlots: reading {graficos/comparacoes_10000.csv}
 PGFPlots: reading {graficos/comparacoes_10000.csv}
-Package pgfplots info on input line 232: Using 'lua backend=false' for axis: ym
+Package pgfplots info on input line 212: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
-Package pgfplots info on input line 232: Using 'lua backend=false' for axis: x 
+Package pgfplots info on input line 212: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
 PGFPlots: reading {graficos/trocas_10000.csv}
 PGFPlots: reading {graficos/trocas_10000.csv}
@@ -574,9 +574,9 @@ PGFPlots: reading {graficos/trocas_10000.csv}
 (tabelas/tab_10000_aleatoria.tex) (tabelas/tab_10000_crescente.tex)
 (tabelas/tab_10000_decrescente.tex) (tabelas/tab_1000000_aleatoria.tex)
 (tabelas/tab_1000000_crescente.tex) (tabelas/tab_1000000_decrescente.tex)
-[2] [3] [4] [5] [6] [7] [8] (artigo-resultados.aux)
+[2] [3] [4] [5] [6] [7] [8] (sbc-template.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  )
-Output written on artigo-resultados.xdv (8 pages, 182176 bytes).
+Output written on sbc-template.xdv (8 pages, 182176 bytes).
